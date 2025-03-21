@@ -28,13 +28,13 @@ async def checker(address, proxy, semaphore):
         async with aiohttp.ClientSession(connector=connector) as session:
             for attempt in range(0, 3):
                 try:
-                        async with session.get(url=f'https://app.ether.fi/api/king/{address}', headers=headers) as response:
+                        async with session.get(url=f'https://app.ether.fi/api/portfolio/season-four/{address}', headers=headers) as response:
                             data = await response.json()
-                            amount = data.get('Amount')
+                            amount = data.get('S4RewardsAmount')
                             error = data.get('error')
                             if amount:
                                 amount = int(amount) / 10 ** 18
-                                logger.success(f'{address} | {amount} KING')
+                                logger.success(f'{address} | Eligible for claim | {amount} KING')
                                 return
                             elif error:
                                 logger.success(f'{address} | Not eligible')
