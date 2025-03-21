@@ -35,7 +35,7 @@ async def checker(address, proxy, semaphore):
                             if amount:
                                 amount = int(amount) / 10 ** 18
                                 logger.success(f'{address} | Eligible for claim | {amount} KING')
-                                return
+                                return True
                             elif error:
                                 logger.success(f'{address} | Not eligible')
                                 return
