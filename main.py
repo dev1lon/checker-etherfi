@@ -20,10 +20,11 @@ async def main():
     elif len(private_keys) == 0 or len(proxies) == 0:
         raise Exception('Нет прокси и адресов')
 
+    semaphore = asyncio.Semaphore(5)
 
     tasks = []
     for private_key, proxy in zip(private_keys, proxies):
-        example = etherfi.EtherFi(private_key=private_key, proxy=proxy)
+        example = etherfi.EtherFi(private_key=private_key, proxy=proxy, semaphore=semaphore)
         tasks.append(example.set_network())
 
     results = await asyncio.gather(*tasks)
