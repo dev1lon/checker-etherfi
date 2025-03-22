@@ -1,0 +1,1 @@
+network = 'Swell' # Ethereum, Swell, Arbitrum, Base
